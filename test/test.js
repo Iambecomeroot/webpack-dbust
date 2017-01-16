@@ -6,7 +6,7 @@ const load = (file) => require(path.join(__dirname, file))
 
 const sinon = require('sinon')
 
-it('should work', (done) => {
+it('should in the best case', (done) => {
   const dbust = sinon.stub().returns(new Promise((resolve) => resolve()))
   const stats = {
     compilation: {
@@ -29,8 +29,4 @@ it('should work', (done) => {
 
   const plugin = new Plugin({})
   plugin.apply(compiler)
-})
-
-it('should do stuff', () => {
-  const stub = sinon.stub()
 })
