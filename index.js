@@ -1,6 +1,6 @@
 'use strict'
 
-const dbust = require('/home/marcel/code/dbust')
+const dbust = require('dbust')
 
 const plugin = require(__dirname + '/plugin.js')
 
