@@ -16,7 +16,12 @@ module.exports = {
 ```
 
 ## Options
-Accepts an object containing options. For a list of options see https://www.npmjs.com/package/dbust#options
+
+### autosave
+Specefies if `dbust.save` should be called automatically. Defaults to `false`.
+
+### dbust
+The rest of the options are passed to dbust. They can be found [here](https://www.npmjs.com/package/dbust#options).
 
 ## See also
 1. [dbust](https://www.npmjs.com/package/dbust)

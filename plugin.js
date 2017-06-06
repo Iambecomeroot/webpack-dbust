@@ -1,36 +1,32 @@
 'use strict'
 
-const path = require('path')
+let _dbust, _options
 
-let dbust
-
-function plugin(options){
-  if(!options || typeof options !== 'object') options = {}
-
-  if(!('base' in options)) options.base = path.dirname(module.parent.filename)
-
-  dbust = dbust(options)
+const plugin = function (options) {
+  _options = options
+  _dbust.options(options)
 }
 
-plugin.prototype.apply = (compiler) => {
+plugin.prototype.apply = compiler => {
   compiler.plugin('done', (stats, cb) => {
     const chunks = stats.compilation.chunks
-    const files  = {}
+    const files = {}
 
-    for(let i = 0; i < chunks.length; i++){
+    for (let i = 0; i < chunks.length; i++) {
       const chunk = chunks[i]
       const name  = `${chunk.name}.js`
 
       files[name] = chunk.files[0]
     }
 
-    dbust(files)
-      .then(cb)
-      .catch(cb)
+    _dbust.put(files)
+    if (_options && _options.autosave) _dbust.save()
+
+    if (typeof cb !== 'undefined') cb()
   })
 }
 
-module.exports = (_dbust) => {
-  dbust = _dbust
+module.exports = dbust => {
+  _dbust = dbust
   return plugin
 }
