@@ -8,7 +8,7 @@ const plugin = function (options) {
 }
 
 plugin.prototype.apply = compiler => {
-  compiler.plugin('done', (stats, cb) => {
+  compiler.hooks.done.tap('dbust', (stats, cb) => {
     const chunks = stats.compilation.chunks
     const files = {}
 

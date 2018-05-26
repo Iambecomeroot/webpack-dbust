@@ -27,7 +27,11 @@ it('should work in the best case', done => {
     done(err)
   }
   const compiler = {
-    plugin: (event, fn) => fn(stats, cb),
+    hooks: {
+      done: {
+        tap: (_, fn) => fn(stats, cb),
+      },
+    },
   }
   const Plugin = require(__dirname + '/plugin.js')(stub)
 
